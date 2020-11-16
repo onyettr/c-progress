@@ -22,14 +22,14 @@ void c_progress(char label[], int step, int total)
   // printf("% *c", width - pos + 1, ']');
   
   printf("] %d%% \r", percent);
-  fflush(stdout);  
+  (void)fflush(stdout);  
 }
 
 int main ( void )
 {
   int i;
   
-  memset(bar, '-', barlength);
+  memset(bar, '-', (size_t)barlength);
   bar[barlength-1] = '\0';
 
   for (i=0; i < 100; i++)

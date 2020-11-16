@@ -62,7 +62,7 @@ TEST_STACK 	     	=
 # clean		Delete object and library files
 #*******************************************************************************
 
-all:	$(OBJECT_DIR) flicker.exe progress.exe spelling-bee
+all:	$(OBJECT_DIR) flicker.exe progress.exe spelling-bee splint-it
 
 lib:	$(LIBS)
 
@@ -84,7 +84,7 @@ $(OBJECT_DIR)/progress.o:	progress.c
 #
 splint-it:
 	$(CODE_CHECK) $(CODE_CHECK_ARGS) flicks.c
-	$(CODE_CHECK) $(CODE_CHECK_ARGS) progress.c   
+#	$(CODE_CHECK) $(CODE_CHECK_ARGS) progress.c   
 
 spelling-bee:
 ifndef CHECK_FOR_CODESPELL

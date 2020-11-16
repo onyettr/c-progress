@@ -1,24 +1,55 @@
+/**
+ * MODULE: C Programming Examples
+ *
+ * Display rotating flicks
+ *
+ * @file   flicks.c
+ * @author ronyett
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+static char Flicks[]="|/-\\|/-\\";
+
+static void flicker(int timeDelay)
+{
+   int Flick=0;
+   int i;
+
+   for(i=0; i < 100000000; i++);   
+   printf("%c\b", Flicks[Flick]);
+   (void)fflush(stdout);   
+   if ( ++Flick == 8 ) {
+     for(i=0; i < timeDelay; i++);
+     Flick -= 8;
+   }
+   
+   (void)fflush(stdout);
+}
 
 int main ( void )
 {
-   static char Flicks[]="|/-\\|/-\\" ;
-   int Flick=0;
-   int goes = 30;
+   int goes = 10;
+   bool done = false;
+   
+   flicker(100000);
 
-   while (goes--)
+   while (!done)
    {
      int i;
 
-     for(i=0; i < 100000000; i++);
+     for(i=0; i < 1000000000; i++);
+     
+     flicker(1000);
 
-     printf("%c\b", Flicks[Flick]);
-     if ( ++Flick == 8 ) {
-       
-       for(i=0; i < 100000; i++);       
-       Flick -= 8;
+     goes--;
+     if (goes <= 0)
+     {
+       done = true;
      }
-     fflush(stdout);
    }
+
+   return 0;
 }
