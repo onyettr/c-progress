@@ -1,53 +1,68 @@
+/**
+ * @file progress.c
+ * @author onyettr
+ * @brief function to display a progress bar
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/*
+ * set maximum size of bar
+ */
 #define BAR_WIDTH       80
 
+/**
+ * @fn void PrintProgressBar(int CurrSize, int MaxSize)
+ * @brief display progress bar
+ * @param[in] CurrSize  Current value we are at
+ * @param[in] MaxSize   maximum range value
+ */
 void PrintProgressBar(int CurrSize, int MaxSize)
 {
-    static char ProgressBar[BAR_WIDTH+1];
-    static char OutputStr[BAR_WIDTH*2];    
-    int Progress;
-    int HashCount;
+  static char ProgressBar[BAR_WIDTH+1];
+  static char OutputStr[BAR_WIDTH*2];
+  int Progress;
+  int HashCount;
 
-    memset(OutputStr, ' ', sizeof(OutputStr));    
-    memset(ProgressBar, ' ', sizeof(ProgressBar));
-    ProgressBar[BAR_WIDTH] = ']';
-    ProgressBar[BAR_WIDTH+1]   = '\0';        
-    OutputStr[BAR_WIDTH] = '\0';
+  memset(OutputStr, ' ', sizeof(OutputStr));
+  memset(ProgressBar, ' ', sizeof(ProgressBar));
+
+  ProgressBar[BAR_WIDTH] = ']';
+  ProgressBar[BAR_WIDTH+1]   = '\0';
+  OutputStr[BAR_WIDTH] = '\0';
       
-    if (MaxSize <= 0)
-    {
-      printf("\n");
+  if (MaxSize <= 0)
+  {
+    printf("\n");
 
-      return;
-    }
+    return;
+   }
 
-    Progress  = (int)((CurrSize / (float)(MaxSize)) * 100);
+   Progress  = (int)((CurrSize / (float)(MaxSize)) * 100);
 
-    HashCount = (CurrSize * BAR_WIDTH) / MaxSize; 
+   HashCount = (CurrSize * BAR_WIDTH) / MaxSize;
 
-    ProgressBar[0] = '[';
+   ProgressBar[0] = '[';
 
-    for (int i=1; i < HashCount; i++)    
-    {
-      ProgressBar[i] = '#';
-    }
+   for (int i=1; i < HashCount; i++)
+   {
+     ProgressBar[i] = '#';
+   }
 
-    sprintf(OutputStr,"%s %3d%%: %6d/%6d Blocks", ProgressBar, Progress, CurrSize, MaxSize);
-    printf("%s", OutputStr);
+   sprintf(OutputStr,"%s %3d%%: %6d/%6d Blocks", ProgressBar, Progress, CurrSize, MaxSize);
+   printf("%s", OutputStr);
 
-    for(int i=0; i < sizeof(OutputStr); i++)
-    {
-      printf("\b");
-    }
-    (void)fflush(stdout);
+   for(int i=0; i < sizeof(OutputStr); i++)
+   {
+     printf("\b");
+   }
+   (void)fflush(stdout);
 
-    if (Progress >= 100)
-    {
-      printf("\n");
-    }
+   if (Progress >= 100)
+   {
+     printf("\n");
+   }
 }
 
 int main ( void )

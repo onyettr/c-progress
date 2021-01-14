@@ -18,7 +18,7 @@ static void flicker(int timeDelay)
    int Flick=0;
    int i;
 
-   for(i=0; i < 100000000; i++);   
+   for(i=0; i < 1000000; i++);
    printf("%c\b", Flicks[Flick]);
    (void)fflush(stdout);   
    if ( ++Flick == 8 ) {
@@ -34,13 +34,13 @@ int main ( void )
    int goes = 10;
    bool done = false;
    
-   flicker(100000);
+   flicker(1000);
 
    while (!done)
    {
      int i;
 
-     for(i=0; i < 1000000000; i++);
+     for(i=0; i < 100000000; i++);
      
      flicker(1000);
 
